@@ -64,7 +64,7 @@ export const PATCH = async (req : Request ,context :{
             return new Response("ID is required", { status: 400 });
         }
 
-        const {title , description , status } = await req.json();
+        const {title , description , status , priority } = await req.json();
         try {
             const task = await db.task.update({
                 where: {
@@ -74,6 +74,7 @@ export const PATCH = async (req : Request ,context :{
                     title: title,
                     description: description,
                     status: status,
+                    priority: priority,
                 }
             })
             return new Response(JSON.stringify(task), {status: 200})
