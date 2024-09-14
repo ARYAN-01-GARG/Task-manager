@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager App
 
-## Getting Started
+## Overview
 
-First, run the development server:
+Task Manager is a web application built with Next.js that allows users to manage their tasks efficiently. Users can create, update, delete, and filter tasks based on priority and other criteria.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Read ,Create, update, and delete tasks
+- Sort tasks by priority, due_date, status and created_at etc
+- Filter tasks based on status, priority, and other attributes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone https://github.com/ARYAN-01-GARG/Task-manager.git
+   cd task-manager-app
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run the development server:
 
-## Deploy on Vercel
+   ```bash
+   npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Open <http://localhost:3000> with your browser to see the result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## API Endpoints
+
+## Tasks
+
+### GET /api/tasks
+
+Retrieves all tasks.
+
+- **Query parameters**: `sort`, `filter`
+- **Response**:
+
+  ```json
+  [
+    { "id": "string", "title": "string", "description" : "string" ,"priority": "string", "status": "string", "dueDate": "date" }
+  ]
+
+### POST /api/tasks
+
+Creates a new task.
+
+- **Request body**:
+
+  ```json
+  { "title": "string", "description" : "string" ,"priority": "string", "status": "string", "dueDate": "date" }
+- **Response body**:
+
+  ```json
+  { "message": "Task created successfully" }
+
+### PATCH /api/tasks/:id
+
+Updates an existing task.
+
+- **Request body**:
+
+    ```json
+    { "title": "string", "description" : "string", "status": "string", "priority": "string" }
+- **Response:**
+
+    ```json
+    { "message": "Task updated successfully" }
+
+### DELETE /api/tasks/:id
+
+Deletes a task.
+
+- **Response**:
+
+    ```json
+    { "message": "Task deleted successfully" }
+
+## Sorting and Filtering
+
+### Sorting
+
+Tasks can be sorted by the following criteria:
+
+priority
+dueDate
+status
+
+### Example:
+
+- **GET /api/tasks?sort=priority**
+
+### Filtering
+
+Tasks can be filtered by the following attributes:
+
+status
+priority
+
+### Example:
+
+- **GET /api/tasks?status=IN_PROGRESS**
+
+## Contributing
+
+1. Fork the repository.
+
+2. Create a new branch: git checkout -b feature/your-feature-name.
+
+3. Make your changes and commit them: git commit -m 'Add some feature'.
+4. Push to the branch: git push origin feature/your-feature-name.
+5. Open a pull request.

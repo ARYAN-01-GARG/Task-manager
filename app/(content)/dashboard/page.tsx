@@ -12,16 +12,16 @@ export default function Dashboard() {
       </div>
       <div className="flex flex-row flex-wrap gap-10 ">
         <div className="bg-purple-600 shadow-xl shadow-purple-400 w-80 h-60 rounded-[4rem]">
-          <Card title="Total Tasks" count={10}/>
+          <Card title="Total Tasks" count={5}/>
         </div>
         <div className="bg-rose-400 shadow-xl shadow-rose-300 w-80 h-60 rounded-[4rem]">
-          <Card title="In Progess" count={10}/>
+          <Card title="In Progess" count={1}/>
         </div>
         <div className="bg-yellow-400 shadow-xl shadow-yellow-300 w-80 h-60 rounded-[4rem]">
-          <Card title="Pending" count={10}/>
+          <Card title="Pending" count={3}/>
         </div>
         <div className="bg-blue-500 shadow-xl shadow-blue-400 w-80 h-60 rounded-[4rem]">
-          <Card title="Important" count={10}/>
+          <Card title="Important" count={1}/>
         </div>
       </div>
     </div>

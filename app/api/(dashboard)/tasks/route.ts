@@ -1,6 +1,6 @@
 import db from "@/libs/db";
 import { NextResponse } from "next/server";
-import { Priority, Status, Prisma } from "@prisma/client"; // Import the necessary types
+import { Priority, Status, Prisma } from "@prisma/client";
 
 export const GET = async (request: Request) => {
     try {
@@ -10,6 +10,7 @@ export const GET = async (request: Request) => {
         const sort = searchParams.get("sort");
 
         // Define the filter options with explicit types
+
         const filterOptions: Prisma.taskWhereInput = {};
         if (status) filterOptions.status = status;
         if (priority) filterOptions.priority = priority;
@@ -40,13 +41,14 @@ export const GET = async (request: Request) => {
 
 export const POST = async (req : Request ) => {
     try{
-        const {title , description , status, due_date } = await req.json();
+        const {title , description , status, due_date , priority } = await req.json();
         const task = await db.task.create({
             data: {
                 title: title,
                 description: description,
                 status: status,
-                due_date: due_date
+                due_date: due_date,
+                priority: priority
             }
         })
         return new Response(JSON.stringify(task), {status: 200})
