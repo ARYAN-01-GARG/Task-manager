@@ -49,7 +49,7 @@ export const DELETE = async (req : Request , context : {
         }
     }
     catch(e){
-        return new Response("error", {status: 500})
+        return new Response(`error : {e}`, {status: 500})
     }
 }
 
@@ -83,6 +83,6 @@ export const PATCH = async (req : Request ,context :{
         }
     }
     catch(e){
-        return new Response("error", {status: 500})
+        return new Response(`error : {e}`, {status: 500})
     }
 }

@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div>
-      Hello Next.js
+    <div className="flex justify-center items-center">
+      Welcome to Our Task page.
     </div>
   );
 }
