@@ -10,6 +10,15 @@ Task Manager is a web application built with Next.js that allows users to manage
 - Sort tasks by priority, due_date, status and created_at etc
 - Filter tasks based on status, priority, and other attributes
 
+## Tech stack
+
+- Typescript
+- Next.js
+- Tailwindcss
+- Prisma ORM
+- Postgresql
+- Shadcn.ui
+
 ## Installation
 
 1. Clone the repository:
