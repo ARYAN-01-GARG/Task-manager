@@ -1,6 +1,5 @@
 'use client';
 
-import Sort from "@/app/components/Options/Sort";
 import Search from "@/app/components/Search";
 import useGetAllTasks from "@/app/hooks/useGetAllTasks";
 import { task } from "@prisma/client";
@@ -13,7 +12,8 @@ function Tasks() {
     const [sort, setSort] = useState("");
     const [filterType, setFilterType] = useState("all");
     const [filterValue, setFilterValue] = useState("");
-    const { tasks, error, isLoading } = useGetAllTasks({type :'' , value: ''} , "" );
+    const { tasks, error, isLoading } = useGetAllTasks();
+    console.log(sort);
     useEffect(() => {
         if (tasks) {
         setShowTasks(tasks);
@@ -49,7 +49,7 @@ function Tasks() {
 
     return (
         <div className="w-full">
-            <Search search={search} setSearch={setSearch} sort={sort} setSort={setSort}filterType={filterType} setFilterType={setFilterType} filterValue={filterValue} setFilterValue={setFilterValue}>
+            <Search search={search} setSearch={setSearch} setSort={setSort} setFilterType={setFilterType} setFilterValue={setFilterValue}>
                 <div className="w-full">
                     <ul className="w-full">
                         <li className="w-full" key="ids">

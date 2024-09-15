@@ -6,11 +6,8 @@ import Sort from "./Options/Sort";
 interface SearchProps {
     search: string;
     setSearch: (search: string) => void;
-    sort: string;
     setSort: (sort: string) => void;
-    filterType: string;
     setFilterType: (filterType: string) => void;
-    filterValue: string;
     setFilterValue: (filterValue: string) => void;
     children: React.ReactNode;
 }
@@ -18,11 +15,8 @@ interface SearchProps {
 function Search({
     search,
     setSearch,
-    sort,
     setSort,
-    filterType,
     setFilterType,
-    filterValue,
     setFilterValue,
     children
 }: SearchProps) {
@@ -43,8 +37,8 @@ function Search({
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 />
-                <Fillter filterType={filterType} setFilterType={setFilterType} filterValue={filterValue} setFilterValue={setFilterValue}/>
-                <Sort sort={sort} setSort={setSort} />
+                <Fillter setFilterType={setFilterType} setFilterValue={setFilterValue}/>
+                <Sort setSort={setSort} />
             </div>
             <div className="w-full">
                 {children}

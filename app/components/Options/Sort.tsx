@@ -6,12 +6,10 @@ import OptionModel from "./OptionModel";
 
 
 interface SortProps {
-    sort: string;
     setSort: (sort: string) => void;
 }
 
 function Sort({
-    sort,
     setSort
 } : SortProps) {
 

@@ -4,15 +4,11 @@ import { useState } from "react";
 import OptionModel from "./OptionModel";
 
 interface FilterProps {
-    filterType: string;
-    filterValue: string;
     setFilterType: (filterType: string) => void;
     setFilterValue: (filterValue: string) => void;
 }
 
 function Fillter({
-    filterType,
-    filterValue,
     setFilterType,
     setFilterValue
 } : FilterProps) {
