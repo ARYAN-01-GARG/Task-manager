@@ -8,12 +8,19 @@ export const GET = async (request: Request) => {
         const status = searchParams.get("status") as Status | null;
         const priority = searchParams.get("priority") as Priority | null;
         const sort = searchParams.get("sort");
+        const search = searchParams.get("search");
 
         // Define the filter options with explicit types
 
         const filterOptions: Prisma.taskWhereInput = {};
         if (status) filterOptions.status = status;
         if (priority) filterOptions.priority = priority;
+        if (search) {
+            filterOptions.OR = [
+                { title: { contains: search, mode: "insensitive" } },
+                { description: { contains: search, mode: "insensitive" } },
+            ];
+        }
 
         // Define the sort options with explicit types
         const sortOptions: Prisma.taskOrderByWithRelationInput = {};

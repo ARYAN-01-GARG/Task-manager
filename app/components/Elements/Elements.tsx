@@ -16,8 +16,8 @@ const Elements = () => {
     <div className="flex flex-col w-full justify-start">
       <LinkElement title="Dashboard" link="/dashboard" Icon={IoHome} active={active === "Dashboard"} setActive={setActive}/>
       <LinkElement title="Tasks" link="/tasks" Icon={BsPostcard} active={active === "Tasks"} setActive={setActive}/>
-      <LinkElement title="Add Task" link="/tasks" Icon={MdOutlineAddToPhotos} active={active === "Add Task"} setActive={setActive}/>
-      <LinkElement title="Pending" link="/tasks" Icon={MdOutlinePending} active={active === "Pending"} setActive={setActive}/>
+      <LinkElement title="Add Task" link="/tasks/new-task" Icon={MdOutlineAddToPhotos} active={active === "Add Task"} setActive={setActive}/>
+      <LinkElement title="Pending" link="/tasks/pending" Icon={MdOutlinePending} active={active === "Pending"} setActive={setActive}/>
       <LinkElement title="Settings" link="/setting" Icon={MdOutlineSettings} active={active === "Settings"} setActive={setActive}/>
     </div>
   )

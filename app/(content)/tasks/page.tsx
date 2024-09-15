@@ -1,36 +1,98 @@
 'use client';
 
-export default function page() {
+import Sort from "@/app/components/Options/Sort";
+import Search from "@/app/components/Search";
+import useGetAllTasks from "@/app/hooks/useGetAllTasks";
+import { task } from "@prisma/client";
 
-  return (
-    <div className="flex flex-col px-8 py-10 gap-10">
-      <div className="">
-        <h2 className="text-purple-600 text-4xl font-semibold ">All Existing <span className="text-black">Tasks</span></h2>
-        <h3 className="text-purple-600 text-2xl ml-2 mt-2">ADMIN PAGE</h3>
-      </div>
-      <div className="text-2xl font-semibold">
-        <label htmlFor="search">Search Tasks : </label>
-        <input
-          type="text"
-          id="search"
-          name="search"
-          placeholder="Search task here..."
-          className="border-2 border-purple-950 rounded-lg px-4 py-2 text-lg"
-        />
-      </div>
-      <ul>
-        {/* {tasks?.map((task) => (
-            <li key={task.task_id}>
-              <h4>
-                {task.title}
-              </h4>
-              <p>
-                {task.description}
-              </p>
-            </li>
-          ))
-        } */}
-      </ul>
-    </div>
-  )
+import { useEffect, useState } from "react";
+
+function Tasks() {
+    const [search, setSearch] = useState("");
+    const [ showTasks, setShowTasks] = useState([]);
+    const [sort, setSort] = useState("");
+    const [filterType, setFilterType] = useState("all");
+    const [filterValue, setFilterValue] = useState("");
+    const { tasks, error, isLoading } = useGetAllTasks({type :'' , value: ''} , "" );
+    useEffect(() => {
+        if (tasks) {
+        setShowTasks(tasks);
+        }
+    }, [tasks]);
+
+    useEffect(() => {
+        if (tasks) {
+        const filteredTasks = tasks.filter((task :task) => {
+            if (filterType === "priority") {
+                return (
+                    task.priority.toLowerCase().includes(filterValue.toLowerCase())
+                );
+            }
+            if (filterType === "status") {
+                return (
+                    task.status.toLowerCase().includes(filterValue.toLowerCase())
+                );
+            }
+            if(filterType === "all") {
+                setSort("");
+                return (task.title.toLowerCase().includes(search.toLowerCase())
+            );
+            }
+        });
+        setShowTasks(filteredTasks);
+        }
+    }, [search, tasks , filterType , filterValue]);
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
+
+    return (
+        <div className="w-full">
+            <Search search={search} setSearch={setSearch} sort={sort} setSort={setSort}filterType={filterType} setFilterType={setFilterType} filterValue={filterValue} setFilterValue={setFilterValue}>
+                <div className="w-full">
+                    <ul className="w-full">
+                        <li className="w-full" key="ids">
+                            <span className="bg-purple-500/20 m-1 px-3 w-[200px]">
+                                #
+                            </span>
+                            <span className="bg-purple-500/20 m-1 px-3 ">
+                                Title
+                            </span>
+                            <span className="bg-purple-500/20 m-1 px-3 ">
+                                Priority
+                            </span>
+                            <span className="bg-purple-500/20 m-1 px-3 ">
+                                Due Date
+                            </span>
+                            <span className="bg-purple-500/20 m-1 px-3 ">
+                                Status
+                            </span>
+                        </li>
+                        {showTasks.map((task :task , index : number ) => (
+                            <li key={task.task_id}>
+                                <span className="bg-purple-500/20 m-1 px-3 ">
+                                    {index + 1}
+                                </span>
+                                <span className="bg-purple-500/20 m-1 px-3 ">
+                                    {task.title}
+                                </span>
+                                <span className="bg-purple-500/20 m-1 px-3 ">
+                                    {task.priority}
+                                </span>
+                                <span className="bg-purple-500/20 m-1 px-3 ">
+                                    {new Date(task.due_date as Date).toLocaleDateString()}
+                                </span>
+                                <span className="bg-purple-500/20 m-1 px-3 ">
+                                    {task.status}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </Search>
+        </div>
+    )
 }
+
+export default Tasks;
